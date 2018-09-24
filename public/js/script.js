@@ -16,9 +16,8 @@ $(document).ready(function () {
                 data: $("#post-comment").serialize(),
                 success: function (response) {
                     waitingDialog.hide();
-                    console.log(response);
-                    var message = "";
-                    var btnType = "";
+                    let message = "";
+                    let btnType = "";
 
                     if(parseInt(response.status) === 1){
                         btnType = "btn-success";
@@ -28,7 +27,7 @@ $(document).ready(function () {
                         message = prepMessage(response.message, "#d9534f", "fa-exclamation-triangle", "Error");
                     }
                     bootbox.alert(message, function () {
-                        $("#send-message-form")[0].reset();
+                        $("#post-comment")[0].reset();
                     }).find(".modal-footer .btn-primary").removeClass("btn-primary").addClass(btnType);
                 }
             });

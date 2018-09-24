@@ -12,7 +12,7 @@
                     <div class="card-header">{{ __('Add A New Film') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('film.store') }}">
+                        <form method="POST" action="{{ route('film.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -105,17 +105,17 @@
                                        class="col-sm-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="country" name="country"
-                                            class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}"
+                                    <select id="country" name="country_id"
+                                            class="form-control{{ $errors->has('country_id') ? ' is-invalid' : '' }}"
                                             required>
                                         @foreach($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
                                         @endforeach
                                     </select>
 
-                                    @if ($errors->has('country'))
+                                    @if ($errors->has('country_id'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('country') }}</strong>
+                                        <strong>{{ $errors->first('country_id') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -130,8 +130,7 @@
                                             <div class="col-md-4">
                                                 <label for="genre{{ $genre->id }}"
                                                        class="control-label text-md-right">{{ $genre->name }}</label>
-                                                <input id="genre{{ $genre->id }}" type="checkbox" name="genre[]" value=""
-                                                       required>
+                                                <input id="genre{{ $genre->id }}" type="checkbox" name="genre[]" value="{{ $genre->id }}">
 
                                                 @if ($errors->has('genre'))
                                                     <span class="invalid-feedback" role="alert">
@@ -153,7 +152,7 @@
                                 <div class="col-md-6">
                                     <input id="photo" type="file"
                                            class="form-control{{ $errors->has('photo') ? ' is-invalid' : '' }}"
-                                           name="photo" value="{{ old('photo') }}" required>
+                                           name="photo" value="{{ old('photo') }}" accept="image/*" required>
 
                                     @if ($errors->has('photo'))
                                         <span class="invalid-feedback" role="alert">

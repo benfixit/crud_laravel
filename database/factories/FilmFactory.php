@@ -11,7 +11,7 @@ $factory->define(Film::class, function (Faker $faker) {
 
     return [
         'name' => $name,
-        'slug' => strtolower(str_replace([' ', '.', '\''], '-', $name)),
+        'slug' => create_slug($name),
         'description' => $faker->sentence(240),
         'release_date' => $faker->date(),
         'rating' => $num,

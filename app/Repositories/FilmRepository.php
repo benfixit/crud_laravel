@@ -12,25 +12,16 @@ use App\Film;
 
 class FilmRepository
 {
-    protected $entity;
-
-    public function __construct(Film $film)
+    public function save(array $data): int
     {
-        $this->entity = $film;
-    }
+        $data['slug'] = create_slug($data['name']);
+        $genres = $data['genre'];
+        unset($data['genre']);
 
-    public function save(array $data): bool
-    {
-        $this->entity->name = $data['user_id'];
-        $this->entity->description = $data['film_id'];
-        $this->entity->release_date = $data['content'];
-        $this->entity->rating = $data['user_id'];
-        $this->entity->ticket_price = $data['film_id'];
-        $this->entity->country = $data['content'];
-        $this->entity->genre = $data['genre'];
-        //handle files
-        //$this->entity->photo = $data['photo'];
+        if($film = Film::create($data)) {
+            $film->genres()->sync($genres);
+        }
 
-        return $this->entity->save($data);
+        return (int) $film->id;   //Could return slug here but id is better
     }
 }

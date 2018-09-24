@@ -29,6 +29,6 @@ class CommentController extends Controller
             $response = ['status' => 1, 'message' => 'You have successfully commented on this film. Thank you.'];
         }
 
-        return response()->json([$response]);
+        return response()->json($response);
     }
 }

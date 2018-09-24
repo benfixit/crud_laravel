@@ -52,8 +52,8 @@ class FilmController extends Controller
 
         $data['photo'] = $request->file('photo')->getClientOriginalName();
 
-        if($id = $this->repository->save($data) && $request->photo->store('films')){
-            return redirect()->route('film.show', $id)->with([
+        if(($id = $this->repository->save($data)) && $request->photo->storeAs('public/films', $data['photo'])){
+            return redirect()->route('film.show', Film::find($id)->slug)->with([
                 'message' => 'Film was successfully addes'
             ]);
         }

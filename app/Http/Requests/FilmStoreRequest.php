@@ -28,9 +28,9 @@ class FilmStoreRequest extends FormRequest
             'name' => 'required|unique:films|min:3|max:255',
             'description' => 'required',
             'release_date' => 'required',
-            'rating' => 'required|min:1|max:5',
+            'rating' => 'required|integer|min:1|max:5',
             'ticket_price' => 'required',
-            'country' => 'required',
+            'country_id' => 'required',
             'genre' => 'required',
             'photo' => 'required|image|max:5000|mimes:jpg,png,bmp,jpeg',
         ];
